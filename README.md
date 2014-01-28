@@ -22,7 +22,10 @@ Example:
 > AB:21:34:L9:62
 
 ### Usage
->git clone 
+>git clone https://github.com/haavamoa/unknownHosts.git
+
+> cd checkClients
+
 >chmod -x checkClients
 
 >./checkClients safehosts.txt myemail@mydomain.com
