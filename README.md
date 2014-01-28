@@ -1,15 +1,25 @@
 unknownHosts
 ============
 
-A Raspberry Pi project : Raspberry sends you email with any unknown host connected to your LAN.
+A Raspberry Pi project : emails you unknown hosts connected to your LAN.
 
-### Prerequisits:
+### Pre-requisits:
 
 * nmap
 
 * mailutils
 
-*mail
+* mail
 
-*smtp
+* smtp
+
+* a safehost.txt file with the mac addresses of the known hosts.
+Example:
+> XX:XX:XX:XX:XX
+ZZ:ZZ:ZZ:ZZ:ZZ
+
+### Usage
+>chmod -x checkClients
+>./checkClients safehosts.txt myemail@mydomain.com
+
 
