@@ -8,7 +8,7 @@ It also paces the unknown host in a .txt file called unknownhosts.txt.
 
 
 #### safehosts.txt
-Example:
+The script reads each line in safehosts.txt, so the files structure naturally has to be like this:
 
 > 62:L9:34:21:AB
 
