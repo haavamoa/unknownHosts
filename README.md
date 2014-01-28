@@ -17,9 +17,9 @@ A Raspberry Pi project : emails you unknown hosts connected to your LAN.
 
 Example:
 
-> XX:XX:XX:XX:XX
+> 62:L9:34:21:AB
 
-> ZZ:ZZ:ZZ:ZZ:ZZ
+> AB:21:34:L9:62
 
 ### Usage
 >chmod -x checkClients
