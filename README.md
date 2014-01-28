@@ -23,6 +23,12 @@ The script reads each line in safehosts.txt, so the files structure naturally ha
 
 >./checkClients safehosts.txt myemail@mydomain.com
 
+or 
+
+> ./checkClients safehosts.txt myemail@mydomain.com &
+
+to run as a background process
+
 ### Requirements
 
 * nmap
