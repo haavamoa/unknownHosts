@@ -40,7 +40,7 @@ to run as a background process
 * smtp
 
 * a safehosts.txt file with the mac addresses of the known hosts.
-* 
+
 ### Future plans
 
 * A host will only be logged as unknown for 24 hours, after 24 hours and the host gets picked up it will send another email about its connection
