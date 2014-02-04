@@ -21,7 +21,7 @@ else
 	    declare -a unknownhosts         
             let j=0
             while IFS=$'\n' read -r line_data; do
-                unknownHosts[i]=$line_data # Populate array.
+                unknownHosts[j]=$line_data # Populate array.
                 ((++j))
             done < unknownhosts.txt
 
@@ -34,7 +34,7 @@ else
 	    done < tempfile.txt
 	    rm -r tempfile.txt
 #Write to file , date and mac addresses
-	    date=$(eval date)
+	    date=$(date "+%F @ %T")
 	    for macC in "${checkList[@]}";do
 		if [[ "${safeList[@]}" != *"$macC"* ]];then #Check if the host is in the safelist
 		    if [[ "${unknownHosts[@]}" != *"$macC"* ]];then #Check if we already have checked it
