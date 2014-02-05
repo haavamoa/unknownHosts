@@ -10,16 +10,16 @@ It also paces the unknown host in a .txt file called unknownhosts.txt.
 #### safehosts.txt
 The script reads each line in safehosts.txt, so the files structure naturally has to be like this:
 
-> 62:L9:34:21:AB
+> 62:L9:34:21:AB - hostname1
 
-> AB:21:34:L9:62
+> AB:21:34:L9:62 - hostname2
 
 ### Usage
 >git clone https://github.com/haavamoa/unknownHosts.git
 
 > cd unknownHosts
 
->chmod -x checkClients
+>chmod 777 checkClients
 
 >./checkClients safehosts.txt myemail@mydomain.com
 
@@ -35,9 +35,9 @@ to run as a background process
 
 * mailutils
 
-* mail
+* postfix
 
-* smtp
+* ssmtp
 
 * a safehosts.txt file with the mac addresses of the known hosts.
 
