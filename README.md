@@ -17,7 +17,7 @@ The script reads each line in safehosts.txt, so the files structure naturally ha
 ### Usage
 >git clone https://github.com/haavamoa/unknownHosts.git
 
-> cd checkClients
+> cd unknownHosts
 
 >chmod -x checkClients
 
