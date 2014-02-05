@@ -1,0 +1,65 @@
+#!/bin/bash
+#This script is created by Havard Moas, 27.01.2014 Trondheim.
+#A bash script to check your LAN's connected clients against a static list with well known hosts mac adresses.
+
+#Give output if the user needs to use parameters
+if [[ -z "$1" ]];
+then
+    echo -e "Please add a valid file with safe hosts.\n Example: ./checkClients safehosts.txt mymail@mydomain.com"
+else
+    if [[ -z "$2" ]];
+    then
+        echo -e "Please add a valid email address to send log from script to. \n Example ./checkClients safehosts.txt mymail@mydomain.com"
+        else
+	while true;
+	do
+
+#Check if unknownhosts.txt exist, this is the file that explains mac adresses that have already been discovered.
+	    if [ ! -f unknownhosts.txt ];then
+		touch unknownhosts.txt;
+	    fi
+
+	    declare -a safeList
+	    let i=0
+	    while IFS=$'\n' read -r line_data; do
+		safeList["$i"]=$line_data | awk -F "-" '{print $1}' # Populate array.
+		echo "${safeList[i]}"
+		((++i))
+	    done < $1
+	    safeList[1]="lol"
+	    echo "${safeList[1]}"
+	    echo "done"
+
+	    declare -a unknownhosts         
+            let j=0
+            while IFS=$'\n' read -r line_data; do
+                unknownHosts[j]=$line_data # Populate array.
+                ((++j))
+            done < unknownhosts.txt
+
+	    nmap -sn 192.168.2.1/24 | grep "MAC Address" | cut -d':' -f2-7 | awk -F "(" '{print $1}' | tr -d ' ' > tempfile.txt
+	    declare -a checkList
+	    declare -i k=0
+	    while read;do
+		checkList[k]="$REPLY" | awk -F "-" '{print $1}'
+		((k = k + 1))
+	    done < tempfile.txt
+	    rm -r tempfile.txt
+#Write to file , date and mac addresses
+	    date=$(date "+%F @ %T")
+	    for macC in "${checkList[@]}";do
+		echo "hei"
+		if [[ "${safeList[@]}" != *"$macC"* ]];then #Check if the host is in the safelist
+		    if [[ "${unknownHosts[@]}" != *"$macC"* ]];then #Check if we already have checked it
+			echo $macC "-" $date >> unknownhosts.txt #Add it to the unknownhosts, so we dont get spammed with the same host
+			message="A new host has just connected to your LAN:\nDate: $date\nHost Mac Address: $macC\n-------\n\nYour friendly router."
+			echo -e $message | mail -a "Subject: Pia : unknownHosts - unknown host connected" $2
+			echo -e $message
+		    fi;
+		fi;
+	    done;
+	    sleep 5;
+	done;
+    fi;
+fi;
+
